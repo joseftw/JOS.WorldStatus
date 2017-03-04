@@ -4,6 +4,7 @@ using JOS.WorldStatus.Features.Metro;
 using JOS.WorldStatus.Features.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -37,7 +38,6 @@ namespace JOS.WorldStatus
 
 			services.AddSingleton<GetDepartures>();
 			services.AddSingleton<IGetRealTimeMetroInfoQuery, HttpGetRealTimeMetroInfoQuery>();
-
 			services.AddMvc();
 		}
 
@@ -49,7 +49,10 @@ namespace JOS.WorldStatus
 			{
 				app.UseDeveloperExceptionPage();
 			}
-
+			app.UseForwardedHeaders(new ForwardedHeadersOptions
+			{
+				ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+			});
 			app.UseMvc();
 		}
 	}
