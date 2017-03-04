@@ -13,7 +13,7 @@
 			"launchBrowser": true,
 			"launchUrl": "api/metro/9288",
 			"environmentVariables": {
-				"ASPNETCORE_ENVIRONMENT": "Development"
+				"ASPNETCORE_ENVIRONMENT": "Development",
 			}
 		},
 		"JOS.WorldStatus": {

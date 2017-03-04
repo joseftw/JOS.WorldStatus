@@ -24,7 +24,7 @@ namespace JOS.WorldStatus
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(env.ContentRootPath)
 				.AddJsonFile("appsettings.json", true, true)
-				.AddEnvironmentVariables("JOS.WorldStatus.");
+				.AddEnvironmentVariables("JOS_WorldStatus_");
 			Configuration = builder.Build();
 		}
 
