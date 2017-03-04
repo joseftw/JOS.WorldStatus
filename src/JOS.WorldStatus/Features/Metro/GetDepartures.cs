@@ -31,7 +31,6 @@ namespace JOS.WorldStatus.Features.Metro
 				return Result.Fail<RealTimeMetroResult>(new List<Error> {error});
 			}
 
-
 			return Result.Ok(new RealTimeMetroResult
 			{
 				StopPointInformation = new StopPointInformation
@@ -48,7 +47,8 @@ namespace JOS.WorldStatus.Features.Metro
 								x.Destination,
 								x.LineNumber,
 								x.Deviations?.Select(CreateDeviation) ?? Enumerable.Empty<Deviation>()
-							))
+							)),
+				OldData = result.ResponseData.DataAge >= 120
 			});
 		}
 

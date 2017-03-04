@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using JOS.WorldStatus.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JOS.WorldStatus.Features.Metro
