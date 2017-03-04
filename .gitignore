@@ -243,3 +243,5 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+src/JOS.WorldStatus/log-*.txt

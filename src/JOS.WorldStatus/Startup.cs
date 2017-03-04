@@ -1,37 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
+using JOS.WorldStatus.Domain;
+using JOS.WorldStatus.Features.Metro;
+using JOS.WorldStatus.Features.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace JOS.WorldStatus
 {
-    public class Startup
-    {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
-        {
-        }
+	public class Startup
+	{
+		public Startup(IHostingEnvironment env)
+		{
+			Log.Logger = new LoggerConfiguration()
+				.MinimumLevel.Debug()
+				.Enrich.FromLogContext()
+				.WriteTo.RollingFile(Path.Combine(env.ContentRootPath, "log-{Date}.txt"))
+				.CreateLogger();
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
-            loggerFactory.AddConsole();
+			var builder = new ConfigurationBuilder()
+				.SetBasePath(env.ContentRootPath)
+				.AddJsonFile("appsettings.json", true, true)
+				.AddEnvironmentVariables("JOS.WorldStatus.");
+			Configuration = builder.Build();
+		}
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+		public IConfigurationRoot Configuration { get; set; }
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
-        }
-    }
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddOptions();
+			services.Configure<MetroSettings>(Configuration.GetSection("Metro"));
+
+			services.AddSingleton<GetDepartures>();
+			services.AddSingleton<IGetRealTimeMetroInfoQuery, HttpGetRealTimeMetroInfoQuery>();
+
+			services.AddMvc();
+		}
+
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+		{
+			loggerFactory.AddSerilog();
+
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+			}
+
+			app.UseMvc();
+		}
+	}
 }
