@@ -8,7 +8,7 @@ namespace JOS.WorldStatus
 {
 	public class Program
 	{
-		public static DateTime StartTime => DateTime.UtcNow;
+		public static DateTime StartTime;
 		public static void Main(string[] args)
 		{
 			var host = new WebHostBuilder()
@@ -24,6 +24,8 @@ namespace JOS.WorldStatus
 				var logger = scope.ServiceProvider.GetService<ILogger<Program>>();
 				logger.LogInformation(LogEvents.ProgramHostBeforeRun, "Host built, calling host.Run()");
 			}
+
+			StartTime = DateTime.UtcNow;
 
 			host.Run();
 		}
