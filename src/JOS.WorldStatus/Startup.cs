@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using JOS.WorldStatus.Domain;
 using JOS.WorldStatus.Features.Metro;
 using JOS.WorldStatus.Features.Shared;
 using Microsoft.AspNetCore.Builder;
@@ -12,7 +11,7 @@ using Serilog;
 
 namespace JOS.WorldStatus
 {
-	public class Startup
+    public class Startup
 	{
 		public Startup(IHostingEnvironment env)
 		{

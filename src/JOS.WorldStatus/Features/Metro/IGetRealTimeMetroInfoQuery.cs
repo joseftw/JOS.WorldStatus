@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using JOS.WorldStatus.Features.Shared.Dtos.TrafikLab;
 
-namespace JOS.WorldStatus.Domain
+namespace JOS.WorldStatus.Features.Metro
 {
 	public interface IGetRealTimeMetroInfoQuery
 	{

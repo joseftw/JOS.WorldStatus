@@ -56,7 +56,9 @@ namespace JOS.WorldStatus.Features.Metro
 		{
 			TransportMode transportMode;
 			if (!Enum.TryParse(stopPointDeviation.StopInfo?.TransportMode, out transportMode))
+			{
 				transportMode = TransportMode.Unspecified;
+			}
 			return new StopPointDeviation(
 				stopPointDeviation.StopInfo?.StopAreaName,
 				transportMode,
