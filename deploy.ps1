@@ -27,7 +27,7 @@ Function CheckExitCode($exitStatus, $output){
 
 Function PublishWebProject(){
 	WriteInformation "Starting to publish JOS.WorldStatus app..." "magenta"
-	dotnet publish src\JOS.WorldStatus\project.json -c Release | out-null
+	dotnet publish JOS.WorldStatus.sln -c Release
     
 	CheckExitCode $lastExitCode
 	WriteInformation "Publishing done." "green"

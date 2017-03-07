@@ -12,7 +12,7 @@ namespace JOS.WorldStatus.Features.Ping
 			return new ObjectResult(new
 			{
 				build = Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationVersion,
-				pong = DateTime.UtcNow
+				started = Program.StartTime
 			});
 		}
 	}
