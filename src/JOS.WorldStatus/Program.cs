@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -10,19 +9,14 @@ namespace JOS.WorldStatus
 	{
 		public static void Main(string[] args)
 		{
-			var config = new ConfigurationBuilder()
-				.SetBasePath(Directory.GetCurrentDirectory())
-				.AddJsonFile("hosting.json", true)
-				.Build();
-
 			var host = new WebHostBuilder()
 				.UseKestrel()
-				.UseConfiguration(config)
 				.UseContentRoot(Directory.GetCurrentDirectory())
 				.UseStartup<Startup>()
+				.UseUrls("http://localhost:5521")
 				.Build();
 
-			var services = (IServiceScopeFactory) host.Services.GetService(typeof(IServiceScopeFactory));
+			var services = (IServiceScopeFactory)host.Services.GetService(typeof(IServiceScopeFactory));
 			using (var scope = services.CreateScope())
 			{
 				var logger = scope.ServiceProvider.GetService<ILogger<Program>>();
