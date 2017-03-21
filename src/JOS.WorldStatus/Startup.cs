@@ -3,15 +3,17 @@ using JOS.WorldStatus.Features.Metro;
 using JOS.WorldStatus.Features.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace JOS.WorldStatus
 {
-    public class Startup
+	public class Startup
 	{
 		public Startup(IHostingEnvironment env)
 		{
@@ -48,6 +50,13 @@ namespace JOS.WorldStatus
 			{
 				app.UseDeveloperExceptionPage();
 			}
+
+			app.UseStaticFiles(new StaticFileOptions {
+				FileProvider = new PhysicalFileProvider(
+					Path.Combine(env.ContentRootPath, "ui", "dist")),
+				RequestPath = new PathString("/ui/dist")
+			});
+
 			app.UseForwardedHeaders(new ForwardedHeadersOptions
 			{
 				ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto

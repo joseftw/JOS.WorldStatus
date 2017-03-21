@@ -245,3 +245,5 @@ ModelManifest.xml
 .fake/
 
 src/JOS.WorldStatus/log-*.txt
+src/JOS.WorldStatus/.vscode
+src/JOS.WorldStatus/ui/dist/**
