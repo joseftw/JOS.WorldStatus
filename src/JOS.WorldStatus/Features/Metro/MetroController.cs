@@ -5,7 +5,7 @@ namespace JOS.WorldStatus.Features.Metro
 {
 	[Route(Constants.ApiPrefix + "/[controller]")]
 	[Produces(Constants.JsonContentType)]
-	public class MetroController : Controller
+	public class MetroController : ControllerBase
 	{
 		private readonly GetDepartures _getDepartures;
 

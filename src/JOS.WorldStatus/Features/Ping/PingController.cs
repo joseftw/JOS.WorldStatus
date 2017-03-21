@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace JOS.WorldStatus.Features.Ping
 {
-	[Route("")]
+	[Route("[controller]")]
 	[Produces(Constants.JsonContentType)]
-	public class PingController : Controller
+	public class PingController : ControllerBase
 	{
 		public IActionResult Index()
 		{
