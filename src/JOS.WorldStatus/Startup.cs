@@ -51,11 +51,8 @@ namespace JOS.WorldStatus
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseStaticFiles(new StaticFileOptions {
-				FileProvider = new PhysicalFileProvider(
-					Path.Combine(env.ContentRootPath, "ui", "dist")),
-				RequestPath = new PathString("/ui/dist")
-			});
+			app.UseDefaultFiles();
+			app.UseStaticFiles();
 
 			app.UseForwardedHeaders(new ForwardedHeadersOptions
 			{

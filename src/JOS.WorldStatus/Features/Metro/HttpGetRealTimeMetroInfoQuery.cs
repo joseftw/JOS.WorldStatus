@@ -2,7 +2,6 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Flurl;
-using JOS.WorldStatus.Domain;
 using JOS.WorldStatus.Features.Shared;
 using JOS.WorldStatus.Features.Shared.Dtos.TrafikLab;
 using Microsoft.Extensions.Options;
