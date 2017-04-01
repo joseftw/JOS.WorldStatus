@@ -1,11 +1,23 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const devConfig = {
+  production: false,
+  devTool: 'inline-sourcemap',
+  outputPath: path.join(__dirname, 'src/dist')
+};
+
+const productionConfig = {
+  production: true,
+  devTool: false,
+  outputPath: '../JOS.WorldStatus/wwwroot'
+};
+
 module.exports = function(args = {}) {
-  const production = args.production;
+  const config = args.production ? productionConfig : devConfig;
   const webpackConfig = {
     context: path.join(__dirname, 'src'),
-    devtool: !production ? 'inline-sourcemap' : false,
+    devtool: config.devTool,
     entry: './js/client.js',
     module: {
       loaders: [
@@ -15,16 +27,16 @@ module.exports = function(args = {}) {
           loader: 'babel-loader',
           query: {
             presets: ['react', 'es2015', 'stage-0'],
-            plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties'],
+            plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties']
           }
         }
       ]
     },
     output: {
-      path: path.join(__dirname, 'src/dist'),
+      path: config.outputPath,
       filename: 'client.min.js'
     },
-    plugins: !production ? [
+    plugins: !config.production ? [
       new webpack.HotModuleReplacementPlugin()
     ] : [
       new webpack.optimize.OccurrenceOrderPlugin(),
