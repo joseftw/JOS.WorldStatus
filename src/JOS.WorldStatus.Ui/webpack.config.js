@@ -10,7 +10,7 @@ const devConfig = {
 const productionConfig = {
   production: true,
   devTool: false,
-  outputPath: '../JOS.WorldStatus/wwwroot'
+  outputPath: path.join(__dirname, '../JOS.WorldStatus/wwwroot')
 };
 
 module.exports = function(args = {}) {
