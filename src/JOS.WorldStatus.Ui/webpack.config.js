@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const devConfig = {
   production: false,
@@ -11,6 +12,37 @@ const productionConfig = {
   production: true,
   devTool: false,
   outputPath: path.join(__dirname, '../JOS.WorldStatus/wwwroot')
+};
+
+const commonPlugins = [
+  new HtmlWebpackPlugin({
+    title: 'Worldstatus!',
+    minify: false,
+    hash: true
+  })
+];
+
+const devPlugins = [
+  new webpack.HotModuleReplacementPlugin()
+];
+
+const productionPlugins = [
+  new webpack.optimize.OccurrenceOrderPlugin(),
+  new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false })
+];
+
+const getPlugins = (production) => {
+  if (production) {
+    return [
+      ...commonPlugins,
+      ...productionPlugins
+    ];
+  }
+
+  return [
+    ...commonPlugins,
+    ...devPlugins
+  ];
 };
 
 module.exports = function(args = {}) {
@@ -34,14 +66,9 @@ module.exports = function(args = {}) {
     },
     output: {
       path: config.outputPath,
-      filename: 'client.min.js'
+      filename: 'static/client-[hash].min.js'
     },
-    plugins: !config.production ? [
-      new webpack.HotModuleReplacementPlugin()
-    ] : [
-      new webpack.optimize.OccurrenceOrderPlugin(),
-      new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false })
-    ]
+    plugins: getPlugins(args.production)
   };
 
   return webpackConfig;
