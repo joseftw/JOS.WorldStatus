@@ -4,6 +4,7 @@
   "description": "An example module to illustrate the usage of a package.json",
   "author": "Josef Ottosson <i@josef.guru>",
   "main": "webpack.config.js",
+  "license": "MIT",
   "dependencies": {
     "babel-core": "6.24.0",
     "babel-loader": "6.4.1",
@@ -24,6 +25,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "babel-eslint": "7.2.1",
+    "eslint": "3.19.0",
+    "eslint-plugin-react": "6.10.3",
     "webpack": "2.3.2"
   }
 }

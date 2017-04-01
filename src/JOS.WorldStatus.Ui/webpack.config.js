@@ -1,4 +1,4 @@
-﻿var debug = process.env.NODE_ENV !== "production";
+var debug = process.env.NODE_ENV !== "production";
 var webpack = require('webpack');
 var path = require('path');
 
@@ -20,7 +20,7 @@ module.exports = {
     ]
   },
   output: {
-    path: "../wwwroot/dist/",
+    path: path.join(__dirname, "dist"),
     filename: "client.min.js"
   },
   plugins: debug ? [] : [
