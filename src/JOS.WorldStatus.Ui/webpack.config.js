@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const devConfig = {
   production: false,
@@ -18,7 +19,8 @@ const commonPlugins = [
   new HtmlWebpackPlugin({
     title: 'Worldstatus!',
     minify: false,
-    hash: true
+    hash: true,
+    template: 'index.html'
   })
 ];
 
@@ -28,7 +30,16 @@ const devPlugins = [
 
 const productionPlugins = [
   new webpack.optimize.OccurrenceOrderPlugin(),
-  new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false })
+  new webpack.optimize.UglifyJsPlugin({
+    mangle: false,
+    sourcemap: false,
+    minify: true
+  }),
+  new CleanWebpackPlugin([productionConfig.outputPath], {
+    root: path.join(__dirname, '..\\'),
+    verbose: true,
+    dry: true
+  })
 ];
 
 const getPlugins = (production) => {

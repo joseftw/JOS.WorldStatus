@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "babel-eslint": "7.2.1",
+    "clean-webpack-plugin": "^0.1.16",
     "eslint": "3.19.0",
     "eslint-config-airbnb-base": "11.1.2",
     "eslint-loader": "1.7.1",
