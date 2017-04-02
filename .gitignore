@@ -247,3 +247,4 @@ ModelManifest.xml
 src/JOS.WorldStatus/log-*.txt
 src/JOS.WorldStatus/.vscode
 src/JOS.WorldStatus/wwwroot
+prodDeploy.ps1
