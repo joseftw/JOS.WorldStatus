@@ -61,7 +61,7 @@ module.exports = function(args = {}) {
   const webpackConfig = {
     context: path.join(__dirname, 'src'),
     devtool: config.devTool,
-    entry: './js/index.js',
+    entry: './js/app.js',
     module: {
       loaders: [
         {

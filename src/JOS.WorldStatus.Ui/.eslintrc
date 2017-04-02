@@ -20,6 +20,6 @@
         "quotes": ["error", "single"],
         "no-empty": ["error", { "allowEmptyCatch": true }],
         "react/no-unknown-property": ["error", { ignore: ["class", "for"] }],
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true }]
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true }],
     }
 }

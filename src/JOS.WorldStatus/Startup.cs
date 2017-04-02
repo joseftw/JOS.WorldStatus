@@ -3,6 +3,7 @@ using JOS.WorldStatus.Features.Authentication;
 using JOS.WorldStatus.Features.Metro;
 using JOS.WorldStatus.Features.Shared;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,11 @@ namespace JOS.WorldStatus
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddOptions();
+			services.AddCors(options =>
+			{
+				options.AddPolicy(Environments.Development, builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+				options.AddPolicy(Environments.Production, builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()); // TODO fix.
+			});
 			services.Configure<MetroSettings>(Configuration.GetSection("Metro"));
 			services.Configure<JwtSettings>(Configuration.GetSection("JWT"));
 
@@ -56,6 +62,7 @@ namespace JOS.WorldStatus
 				app.UseDeveloperExceptionPage();
 			}
 
+			app.UseCors(env.EnvironmentName);
 			app.UseDefaultFiles();
 			app.UseStaticFiles();
 
