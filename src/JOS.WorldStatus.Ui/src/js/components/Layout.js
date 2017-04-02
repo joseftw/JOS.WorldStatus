@@ -1,14 +1,10 @@
-import React from "react";
-
-import Header from "./Header";
-import Footer from "./Footer";
+import React from 'react';
 
 export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Header />
-        <Footer />
+        <h1>HELLO WORLD</h1>
       </div>
     );
   }
