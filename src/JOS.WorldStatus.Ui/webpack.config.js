@@ -40,7 +40,12 @@ const productionPlugins = [
   new webpack.optimize.UglifyJsPlugin({
     mangle: false,
     sourcemap: false,
-    minify: true
+    minify: true,
+    comments: false,
+    compress: {
+      warnings: false,
+      drop_console: true
+    }
   }),
   new CleanWebpackPlugin([path.join(productionConfig.outputPath, 'static')], {
     root: path.join(__dirname, '..\\'),

@@ -47,8 +47,7 @@ namespace JOS.WorldStatus.Features.Metro
 								x.Destination,
 								x.LineNumber,
 								x.Deviations?.Select(CreateDeviation) ?? Enumerable.Empty<Deviation>()
-							)),
-				OldData = result.ResponseData.DataAge >= 120
+							))
 			});
 		}
 
