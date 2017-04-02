@@ -25,6 +25,14 @@ Function CheckExitCode($exitStatus, $output){
 	}
 }
 
+Function BuildFrontend(){
+	WriteInformation "Starting to build UI" "magenta"
+	npm run build --prefix src\JOS.WorldStatus.Ui\
+	
+	CheckExitCode $lastExitCode
+	WriteInformation "UI build done" "green"
+}
+
 Function PublishWebProject(){
 	WriteInformation "Starting to publish JOS.WorldStatus app..." "magenta"
 	dotnet publish JOS.WorldStatus.sln -c Release
@@ -84,6 +92,8 @@ Function RestartSystemdService(){
 }
 
 $sshSession = OpenConnection $sshUser $serverIp $keyFile
+
+BuildFrontend
 
 PublishWebProject
 

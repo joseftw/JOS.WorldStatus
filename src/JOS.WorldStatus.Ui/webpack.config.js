@@ -35,10 +35,10 @@ const productionPlugins = [
     sourcemap: false,
     minify: true
   }),
-  new CleanWebpackPlugin([productionConfig.outputPath], {
+  new CleanWebpackPlugin([path.join(productionConfig.outputPath, 'static')], {
     root: path.join(__dirname, '..\\'),
     verbose: true,
-    dry: true
+    dry: false
   })
 ];
 
