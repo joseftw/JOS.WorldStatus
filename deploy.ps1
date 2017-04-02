@@ -107,7 +107,7 @@ RestartSystemdService
 
 Remove-SSHSession -Name $sshSession | Out-Null 
 
-Start-Sleep -s 2
+Start-Sleep -s 10
 
-$response = Invoke-WebRequest -URI http://worldstatus.josefottosson.se
+$response = Invoke-WebRequest -URI https://worldstatus.josefottosson.se
 WriteInformation "Deployment done!" "green"

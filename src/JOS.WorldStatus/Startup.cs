@@ -1,13 +1,12 @@
 ﻿using System.IO;
+using JOS.WorldStatus.Features.Authentication;
 using JOS.WorldStatus.Features.Metro;
 using JOS.WorldStatus.Features.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
@@ -36,13 +35,19 @@ namespace JOS.WorldStatus
 		{
 			services.AddOptions();
 			services.Configure<MetroSettings>(Configuration.GetSection("Metro"));
+			services.Configure<JwtSettings>(Configuration.GetSection("JWT"));
 
+			services.AddSingleton<IUserStore, InMemoryUserStore>();
+			services.AddSingleton<JwtTokenGenerator>();
 			services.AddSingleton<GetDepartures>();
 			services.AddSingleton<IGetRealTimeMetroInfoQuery, HttpGetRealTimeMetroInfoQuery>();
 			services.AddMvc();
 		}
 
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+		public void Configure(
+			IApplicationBuilder app, 
+			IHostingEnvironment env, 
+			ILoggerFactory loggerFactory)
 		{
 			loggerFactory.AddSerilog();
 

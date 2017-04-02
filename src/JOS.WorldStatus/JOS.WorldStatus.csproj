@@ -13,14 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ui\node_modules\**" />
-    <Content Remove="ui\node_modules\**" />
-    <EmbeddedResource Remove="ui\node_modules\**" />
-    <None Remove="ui\node_modules\**" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Compile Remove="ui\**" />
     <Content Remove="ui\**" />
+    <EmbeddedResource Remove="ui\**" />
+    <None Remove="ui\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,10 +38,10 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="1.4.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="3.2.0" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.1.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="ui\package.json" />
     <None Include="wwwroot\dist\client.min.js" />
     <None Include="wwwroot\index.html" />
   </ItemGroup>
