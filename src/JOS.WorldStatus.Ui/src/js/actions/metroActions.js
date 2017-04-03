@@ -5,6 +5,9 @@ const apiUrl = __SITECONFIG__.apiUrl;
 
 export function fetchMetroInformation() {
   return function(dispatch) {
+    dispatch({
+      type: 'FETCH_METRO'
+    });
     axios.get(`${apiUrl}/api/metro/9288`) // TODO dont hardcode user station.
       .then((response) => {
         dispatch({

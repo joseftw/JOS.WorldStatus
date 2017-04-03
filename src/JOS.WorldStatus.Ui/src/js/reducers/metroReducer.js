@@ -15,12 +15,14 @@ export default function reducer(state = {
       return {
         ...state,
         fetched: true,
+        fetching: false,
         errors: action.payload.errors
       };
     case 'FETCH_METRO_FULFILLED':
       return {
         ...state,
         fetched: true,
+        fetching: false,
         stopPointDeviations: action.payload.stopPointInformation.deviations,
         metroInfo: action.payload.metroInfo
       };

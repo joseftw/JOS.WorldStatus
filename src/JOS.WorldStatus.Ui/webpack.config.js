@@ -79,7 +79,7 @@ const getPlugins = (production) => {
   ];
 };
 
-module.exports = function (args = {}) {
+module.exports = function(args = {}) {
   const config = args.production ? productionConfig : devConfig;
   const webpackConfig = {
     context: path.join(__dirname, 'src'),

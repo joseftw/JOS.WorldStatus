@@ -1,0 +1,10 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-container > div {
+	width: 50%;
+}

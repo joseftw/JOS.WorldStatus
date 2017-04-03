@@ -18,6 +18,7 @@ namespace JOS.WorldStatus.Features.Metro
 
 		public async Task<Result<RealTimeMetroResult>> Handle(int siteId)
 		{
+			await Task.Delay(7000);
 			var result = await _getRealTimeMetroInfoQuery.Execute(siteId);
 
 			if (result.StatusCode > 0)
