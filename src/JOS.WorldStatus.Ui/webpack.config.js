@@ -79,7 +79,7 @@ const getPlugins = (production) => {
   ];
 };
 
-module.exports = function(args = {}) {
+module.exports = function (args = {}) {
   const config = args.production ? productionConfig : devConfig;
   const webpackConfig = {
     context: path.join(__dirname, 'src'),
@@ -100,7 +100,18 @@ module.exports = function(args = {}) {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: ['css-loader', 'sass-loader'],
+            use: [{
+              loader: 'css-loader',
+              options: {
+                minimize: config.production,
+                sourceMap: !config.production
+              }
+            }, {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: !config.production
+              }
+            }],
             publicPath: '/dist'
           })
         }
