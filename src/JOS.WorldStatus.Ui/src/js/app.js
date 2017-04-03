@@ -8,6 +8,8 @@ import Dashboard from './components/Dashboard';
 import Layout from './components/Layout';
 import store from './store';
 
+import '../styles/main.scss';
+
 const app = document.getElementById('app');
 const history = createBrowserHistory();
 

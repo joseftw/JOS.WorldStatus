@@ -1,14 +1,15 @@
 import React from 'react';
-import MetroWidget from './widgets/metroWidget';
+import Widget from './widgets/Widget';
+import MetroWidget from './widgets/MetroWidget';
 
 export default class Dashboard extends React.Component {
   render() {
-    console.log(this.props);
     return (
-      <div>
-        <base href="/" />
+      <div className="dashboard container">
         <h1>IM LE DASHBOARD</h1>
-        <MetroWidget />
+        <Widget>
+          <MetroWidget />
+        </Widget>
       </div>
     );
   }

@@ -20,4 +20,9 @@ export class MetroWidget extends React.Component {
 const mapStateToProps = state => ({
   stopPointDeviations: state.metro.stopPointDeviations
 });
+
+MetroWidget.propTypes = {
+  dispatch: React.PropTypes.func.isRequired
+};
+
 export default connect(mapStateToProps)(MetroWidget);

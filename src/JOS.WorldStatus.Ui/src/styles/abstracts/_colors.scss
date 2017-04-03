@@ -1,0 +1,49 @@
+$colors: (
+    'white': ('base': #fff),
+    'dark':  ('base': #333),
+    'grey': (
+        'base':  #e5e2db,
+        'light': #f5f3ee,
+        'dark':  #5d5c58
+    ),
+    'orange': (
+        'base':  #dd4a2c,
+        'light': #fee1dd
+    ),
+    'yellow': (
+        'base':  #fcbf0a,
+        'light': #fef7d8
+    ),
+    'blue': (
+        'base':  #006ebf,
+        'light': #d6edfc
+    ),
+    'pink': (
+        'base':  #c40064,
+        'light': #fedeed
+    ),
+    'green': (
+        'base':  #00867f,
+        'light': #d5f7f4
+    ),
+    'purple': (
+        'base':  #5d237d,
+        'light': #f1e6fc
+    )
+);
+
+@function color($palette, $tone: 'base') {
+    $color: map-get(map-get($colors, $palette), $tone);
+
+    @return $color;
+}
+
+// Add percentage of white to a color
+@function tint($color, $percent) {
+    @return mix(white, $color, $percent);
+}
+
+// Add percentage of black to a color
+@function shade($color, $percent) {
+    @return mix(black, $color, $percent);
+}

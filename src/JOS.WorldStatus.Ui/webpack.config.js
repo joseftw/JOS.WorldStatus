@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const devConfig = {
   apiUrl: 'http://localhost:5521',
@@ -32,7 +33,12 @@ const commonPlugins = production => [
 ];
 
 const devPlugins = [
-  new webpack.HotModuleReplacementPlugin()
+  new webpack.HotModuleReplacementPlugin(),
+  new ExtractTextPlugin({
+    filename: 'main-[hash].css',
+    allChunks: true,
+    disable: true
+  })
 ];
 
 const productionPlugins = [
@@ -51,6 +57,11 @@ const productionPlugins = [
     root: path.join(__dirname, '..\\'),
     verbose: true,
     dry: false
+  }),
+  new ExtractTextPlugin({
+    filename: 'static/main-[hash].css',
+    allChunks: true,
+    disable: false
   })
 ];
 
@@ -75,7 +86,7 @@ module.exports = function(args = {}) {
     devtool: config.devTool,
     entry: './js/app.js',
     module: {
-      loaders: [
+      rules: [
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
@@ -84,6 +95,14 @@ module.exports = function(args = {}) {
             presets: ['react', 'es2015', 'stage-0'],
             plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties']
           }
+        },
+        {
+          test: /\.scss$/,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: ['css-loader', 'sass-loader'],
+            publicPath: '/dist'
+          })
         }
       ]
     },
