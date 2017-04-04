@@ -4,10 +4,5 @@
     "react-html-attrs",
     "transform-decorators-legacy",
     "transform-class-properties"
-  ],
-  "env": {
-     "development": {
-      "presets": ["react-hmre"]
-     }
-  }
+  ]
 }
