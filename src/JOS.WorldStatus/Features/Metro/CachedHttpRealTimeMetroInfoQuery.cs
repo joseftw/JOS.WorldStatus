@@ -29,7 +29,7 @@ namespace JOS.WorldStatus.Features.Metro
 			}
 
 			var response = await _httpGetRealTimeMetroInfoQuery.Execute(siteId);
-			_cache.Save(cacheKey, response, TimeSpan.FromMinutes(1));
+			_cache.Save(cacheKey, response, TimeSpan.FromSeconds(30));
 			return response;
 		}
 	}

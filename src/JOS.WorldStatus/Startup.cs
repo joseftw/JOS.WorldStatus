@@ -58,7 +58,8 @@ namespace JOS.WorldStatus
 		public void Configure(
 			IApplicationBuilder app, 
 			IHostingEnvironment env, 
-			ILoggerFactory loggerFactory)
+			ILoggerFactory loggerFactory
+		)
 		{
 			loggerFactory.AddSerilog();
 

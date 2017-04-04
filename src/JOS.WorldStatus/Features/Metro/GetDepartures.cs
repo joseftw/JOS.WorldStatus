@@ -53,8 +53,7 @@ namespace JOS.WorldStatus.Features.Metro
 
 		private static StopPointDeviation CreateStopPointDeviation(StopPointDeviationDto stopPointDeviation)
 		{
-			TransportMode transportMode;
-			if (!Enum.TryParse(stopPointDeviation.StopInfo?.TransportMode, out transportMode))
+			if (!Enum.TryParse(stopPointDeviation.StopInfo?.TransportMode, out TransportMode transportMode))
 			{
 				transportMode = TransportMode.Unspecified;
 			}

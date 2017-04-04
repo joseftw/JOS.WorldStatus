@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchMetroInformation } from '../../actions/metroActions';
-import Loader from '../Loader';
+import { fetchMetroInformation } from '../../../actions/metroActions';
+import Loader from '../../Loader';
+import StopPointInfo from './StopPointInfo';
+import MetroInfo from './MetroInfo';
 
 import './_metroWidget.scss';
 
@@ -12,19 +14,26 @@ export class MetroWidget extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-
     const showLoader = this.props.fetching;
+    if (showLoader) {
+      return (
+        <div>
+          <Loader message={'Fetching metro information...'} />
+        </div>
+      );
+    }
+
     return (
       <div>
-        { showLoader && <Loader message={'Fetching metro information...'} /> }
+        <StopPointInfo stopPointInformation={this.props.stopPointInformation} />
+        <MetroInfo metroInfo={this.props.metroInfo} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  stopPointDeviations: state.metro.stopPointDeviations,
+  stopPointInformation: state.metro.stopPointInformation,
   metroInfo: state.metro.metroInfo,
   fetching: state.metro.fetching,
   fetched: state.metro.fetched
@@ -35,7 +44,7 @@ MetroWidget.propTypes = {
   metroInfo: React.PropTypes.array.isRequired,
   fetching: React.PropTypes.bool.isRequired,
   fetched: React.PropTypes.bool.isRequired,
-  stopPointDeviations: React.PropTypes.array.isRequired
+  stopPointInformation: React.PropTypes.object.isRequired
 };
 
 export default connect(mapStateToProps)(MetroWidget);

@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const devConfig = {
   apiUrl: 'http://localhost:5521',
@@ -62,7 +63,8 @@ const productionPlugins = [
     filename: 'static/main-[hash].css',
     allChunks: true,
     disable: false
-  })
+  }),
+  new FaviconsWebpackPlugin('./img/logo.jpg')
 ];
 
 const getPlugins = (production) => {
@@ -90,11 +92,7 @@ module.exports = function(args = {}) {
         {
           test: /\.jsx?$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'babel-loader',
-          query: {
-            presets: ['react', 'es2015', 'stage-0'],
-            plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties']
-          }
+          loader: 'babel-loader'
         },
         {
           test: /\.scss$/,

@@ -1,5 +1,7 @@
 export default function reducer(state = {
-  stopPointDeviations: [],
+  stopPointInformation: {
+    deviations: []
+  },
   metroInfo: [],
   fetching: false,
   fetched: false,
@@ -23,7 +25,7 @@ export default function reducer(state = {
         ...state,
         fetched: true,
         fetching: false,
-        stopPointDeviations: action.payload.stopPointInformation.deviations,
+        stopPointInformation: action.payload.stopPointInformation,
         metroInfo: action.payload.metroInfo
       };
   }

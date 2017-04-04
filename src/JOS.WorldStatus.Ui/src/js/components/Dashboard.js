@@ -1,6 +1,6 @@
 import React from 'react';
 import Widget from './widgets/Widget';
-import MetroWidget from './widgets/MetroWidget';
+import MetroWidget from './widgets/metro/MetroWidget';
 
 import './_dashboard.scss';
 
