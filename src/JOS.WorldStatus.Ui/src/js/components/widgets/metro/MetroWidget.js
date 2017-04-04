@@ -11,6 +11,15 @@ import './_metroWidget.scss';
 export class MetroWidget extends React.Component {
   componentWillMount() {
     this.props.dispatch(fetchMetroInformation());
+    this.startPoll();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
+
+  startPoll() {
+    this.timeout = setTimeout(() => this.props.dispatch(fetchMetroInformation()), 30000);
   }
 
   render() {
