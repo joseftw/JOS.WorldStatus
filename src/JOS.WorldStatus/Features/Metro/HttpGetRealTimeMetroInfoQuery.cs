@@ -25,6 +25,7 @@ namespace JOS.WorldStatus.Features.Metro
 
 		public async Task<TrafikLabResponseDto<DepartureDto>> Execute(int siteId)
 		{
+			//TODO ERRORHANDLING
 			var fullUrl = new Url(this._metroSettings.RealTimeDepartures.BaseUrl);
 			fullUrl.QueryParams.Add("key", this._metroSettings.RealTimeDepartures.ApiKey);
 			fullUrl.QueryParams.Add("siteid", siteId);
