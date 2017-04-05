@@ -46,7 +46,9 @@ namespace JOS.WorldStatus.Features.Metro
 								x.DisplayTime,
 								x.Destination,
 								x.LineNumber,
-								x.Deviations?.Select(CreateDeviation) ?? Enumerable.Empty<Deviation>()
+								x.Deviations?.Select(CreateDeviation) ?? Enumerable.Empty<Deviation>(),
+								x.TimeTabledDateTime,
+								x.ExpectedDateTime
 							))
 			});
 		}

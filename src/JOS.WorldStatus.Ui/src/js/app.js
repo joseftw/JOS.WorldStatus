@@ -13,6 +13,19 @@ import '../styles/main.scss';
 const app = document.getElementById('app');
 const history = createBrowserHistory();
 
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((location) => {
+      console.log('hejhej', location);
+    });
+  } else {
+    const hej = 'tja';
+    console.log(hej);
+  }
+}
+
+getLocation();
+
 render(
   <Provider store={store}>
     <Router history={history}>

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using JOS.WorldStatus.Features.Metro;
 
 namespace JOS.WorldStatus.Domain
 {
@@ -10,7 +12,9 @@ namespace JOS.WorldStatus.Domain
 			string displayTime,
 			string destination,
 			string lineNumber,
-			IEnumerable<Deviation> deviations
+			IEnumerable<Deviation> deviations,
+			DateTime? timeTabled,
+			DateTime? expected
 		)
 		{
 			StopAreaName = stopAreaName;
@@ -18,8 +22,12 @@ namespace JOS.WorldStatus.Domain
 			LineNumber = lineNumber;
 			DisplayTime = displayTime;
 			Deviations = deviations ?? Enumerable.Empty<Deviation>();
+			TimeTabled = timeTabled ?? MetroHelpers.TimeTabled(displayTime);
+			Expected = expected;
 		}
 
+		public DateTime? TimeTabled { get; set; }
+		public DateTime? Expected { get; set; }
 		public string StopAreaName { get; }
 		public string Destination { get; }
 		public string LineNumber { get; }

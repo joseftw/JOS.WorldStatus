@@ -20,7 +20,8 @@ export default class MetroInfo extends React.Component {
       rows.push(
         <DepartureRow key={i}
           destination={departure.destination}
-          displayTime={departure.displayTime} />
+          displayTime={departure.displayTime}
+          timeTabled={departure.timeTabled} />
       );
     }
     console.log(rows);
